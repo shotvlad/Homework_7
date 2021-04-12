@@ -14,7 +14,6 @@ bool isNumber(char str[], int i);
 int getSizeArray(char str[]);
 void moveToLeft(char str[], int view, int i);
 void completionArray(char str[], int cells, int number, int i, char element);
-void сompletionStr(char str[], char strHelp[], int size);
 
 int main()
 {
@@ -95,32 +94,27 @@ void moveToLeft(char str[], int size, int i)
 
 void completionArray(char str[], int size, int number, int i, char element)
 {
-	char strHelp[N] = "";
+	int n = i + 1;
 
-	for (int h = 0; h <= size - 1; h++)
+	for (int n = size - number, h = size - 1; n > i; n--, h--)
 	{
-		if (h < i)
+		str[h] = str[n];
+	}
+
+	number--;
+
+	while (true)
+	{
+		str[i] = element;
+
+		if (number != 0)
 		{
-			strHelp[h] = str[h];
-		}
-		else if (h <= i + number - 1)
-		{
-			strHelp[h] = element;
+			i++;
+			number--;
 		}
 		else
 		{
-			strHelp[h] = str[i + 1];
-			i++;
+			break;
 		}
-	}
-
-	сompletionStr(str, strHelp, size);
-}
-
-void сompletionStr(char str[], char strHelp[], int size)
-{
-	for (int i = 0; i <= size - 1; i++)
-	{
-		str[i] = strHelp[i];
 	}
 }
